@@ -50,7 +50,7 @@ userRouter.post('/login', async (req, res) => {
 
 
 // add new user
-userRouter.post('/add', async (req, res) => {
+userRouter.post('/register', async (req, res) => {
     try {
 
         const authHeader = req.headers.authorization;
@@ -59,10 +59,8 @@ userRouter.post('/add', async (req, res) => {
             const token = authHeader.split(' ')[1];
 
             jwt.verify(token, 'secret', (err, user) => {
-                if (user.jabatan != 'bos') 
+                if (user.jabatan != 0) 
                     return res.status(403).json({"message": "Anda tidak memiliki wewenang"});
-                
-
 
                 if (err) {
                     console.log(err)
@@ -78,11 +76,8 @@ userRouter.post('/add', async (req, res) => {
         // digit angkat mau berapa banyak
         var saltRounds = 10;
         const hashedPw = await bcrypt.hash(password, saltRounds)
-
         const newUser = new User({"username": username, "email": email, "password": hashedPw, "jabatan": jabatan})
-
         const createdUser = await newUser.save()
-
         res.status(201).json(createdUser)
     } catch (error) {
         console.log(error)
@@ -98,11 +93,8 @@ userRouter.get('/', async (req, res) => {
         const token = authHeader.split(' ')[1];
 
         jwt.verify(token, 'secret', (err, user) => {
-            if (user.jabatan != 'bos') 
+            if (user.jabatan != 0 || user.jabatan != 3) 
                 return res.status(403).json({"message": "Anda tidak memiliki wewenang"});
-            
-
-
             if (err) {
                 console.log(err)
                 return res.sendStatus(403);
@@ -127,13 +119,9 @@ userRouter.get('/:id', async (req, res) => {
 
     if (authHeader) {
         const token = authHeader.split(' ')[1];
-
         jwt.verify(token, 'secret', (err, user) => {
-            if (user.jabatan != 'bos') 
+            if (user.jabatan != 0 || user.jabatan != 3) 
                 return res.status(403).json({"message": "Anda tidak memiliki wewenang"});
-            
-
-
             if (err) {
                 console.log(err)
                 return res.sendStatus(403);
@@ -166,7 +154,7 @@ userRouter.patch('/:id', async (req, res) => {
         const token = authHeader.split(' ')[1];
 
         jwt.verify(token, 'secret', (err, user) => {
-            if (user.jabatan != 'bos') 
+            if (user.jabatan != 0) 
                 return res.status(403).json({"message": "Anda tidak memiliki wewenang"});
         
             if (err) {
@@ -214,7 +202,7 @@ userRouter.delete('/:id', async (req, res) => {
         const token = authHeader.split(' ')[1];
 
         jwt.verify(token, 'secret', (err, user) => {
-            if (user.jabatan != 'bos') 
+            if (user.jabatan != 0) 
                 return res.status(403).json({"message": "Anda tidak memiliki wewenang"});
             
             if (err) {
