@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
         required: true
     },
     jabatan: {
-        type: String,
+        type: Number,
         required: true
     }
 }, {timestamps: true})
