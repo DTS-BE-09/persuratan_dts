@@ -13,11 +13,11 @@ userRouter.use(bodyParser.json());
 // login
 userRouter.post('/login', async (req, res) => {
     try {
-        const {username, password} = req.body;
+        const {email, password} = req.body;
 
         const currentUser = await new Promise((resolve, reject) => {
             User.find({
-                "username": username
+                "email": email
             }, function (err, user) {
                 if (err) 
                     reject(err)
