@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const suratSchema = mongoose.Schema({
-    Surat : {
+    surat : {
         type:String,
         required:true
     },

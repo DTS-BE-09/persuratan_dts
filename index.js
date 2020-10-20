@@ -7,6 +7,8 @@ dotenv.config()
 
 import userRouter from './controllers/userController.js'
 import adminRouter from './controllers/adminController.js'
+import suratRouter from './controllers/suratController.js'
+
 
 const app = express();
 
@@ -36,6 +38,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/admin/', adminRouter)
 app.use('/api/v1/', userRouter)
+app.use('/api/v1/surat/', suratRouter)
 
 const PORT = process.env.PORT || '3000'
 
