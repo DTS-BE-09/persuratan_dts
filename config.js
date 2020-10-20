@@ -2,4 +2,4 @@ const Conf = {
     secret: "secret"
 }
 
-module.exports = Conf
+export default Conf

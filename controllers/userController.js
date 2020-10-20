@@ -1,9 +1,9 @@
-const User = require('../models/user')
-const express = require('express')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const Conf = require('../config')
-const bodyParser = require('body-parser')
+import User from '../models/user.js'
+import express from 'express'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import Conf from '../config.js'
+import bodyParser from 'body-parser'
 
 const userRouter = express.Router()
 
@@ -243,4 +243,4 @@ userRouter.delete('/:id', async (req, res) => {
     }
 })
 
-module.exports = userRouter
+export default userRouter

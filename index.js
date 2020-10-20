@@ -1,12 +1,13 @@
-const express = require('express')
-const morgan = require('morgan')
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
-const jwt = require('jsonwebtoken')
-const Conf = require('./config')
+import express from 'express'
+import morgan from 'morgan'
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
+import Conf from './config.js'
+
 dotenv.config()
 
-const userRouter = require('./controllers/UserController')
+import userRouter from './controllers/UserController.js'
 
 const app = express();
 
