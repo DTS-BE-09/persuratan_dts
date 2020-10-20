@@ -2,12 +2,11 @@ import express from 'express'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
-import Conf from './config.js'
 
 dotenv.config()
 
-import userRouter from './controllers/UserController.js'
+import userRouter from './controllers/userController.js'
+import adminRouter from './controllers/adminController.js'
 
 const app = express();
 
@@ -35,8 +34,8 @@ app.get('/', (req, res) => {
     res.json({message: 'success'});
 })
 
-app.use('/api/user', userRouter)
-
+app.use('/api/v1/admin/', adminRouter)
+app.use('/api/v1/', userRouter)
 
 const PORT = process.env.PORT || '3000'
 
