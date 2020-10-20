@@ -9,6 +9,8 @@ const __dirname = path.resolve();
 
 const suratRouter = express.Router()
 
+userRouter.use(bodyParser.urlencoded({extended: false}));
+userRouter.use(bodyParser.json());
 suratRouter.use(fileUpload());
 
 suratRouter.post('/upload-surat', async (req, res) => {
